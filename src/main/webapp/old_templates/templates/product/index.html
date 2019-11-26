@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content=""/>
+    <meta name="author" content="hash#Team"/>
+
+    <title>Rocket's Pocket</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/cart.css" rel="stylesheet">
+    <link href="static/css/shop-homepage.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Rocket's Pocket</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span class="icon-cart" style="float: left">
+                      <div class="cart-line-1" style="background-color: #02A7D7"></div>
+                      <div class="cart-line-2" style="background-color: #02A7D7"></div>
+                      <div class="cart-line-3" style="background-color: #02A7D7"></div>
+                      <div class="cart-wheel" style="background-color: #02A7D7"></div>
+                      <span class='badge badge-warning' id='lblCartCount' style="float: left" th:text="${counter}">Count</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <a href="/"><img class="card-img-top" src="/static/img/logo_rocket_1_732x732.jpg" alt="Rocket's Pocket"></a>
+            <div class="list-group">
+                <a href="audio" class="list-group-item">Audio Devices</a>
+                <a href="weapons" class="list-group-item">Weapons</a>
+                <a href="spaceships" class="list-group-item">Spaceships</a>
+                <a href="wearable" class="list-group-item">Wearable</a>
+            </div>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" th:each="prod,iterStat : ${products}">
+                    <div class="card h-100">
+                        <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt="item">
+                            <!--th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'"--></a>
+                        <div class="card-body">
+                            <form method="POST"><!--action="index.html"-->
+                                <input type="submit" class="btn btn-success" name="add" value="Add to cart">
+                                <input type="hidden" name="product" th:value="${prod.getId()}">
+                            </form>
+                            <h4 class="card-title" th:text="${prod.name}">Product name </h4>
+                            <h5 th:text="${prod.getPrice()}">100 USD</h5>
+                            <p class="card-text" th:text="${prod.description}">Product description... </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.row -->
+            </div>
+
+            <!-- /.col-lg-9 -->
+        </div>
+
+        <!-- /.row -->
+    </div>
+
+    <!-- /.container -->
+</div>
+
+<!-- Footer -->
+<div th:replace="/footer.html :: copy"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
